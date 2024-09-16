@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: mposada
+    database: academy
+    schema: mposada
+    tables:
+      - name: chess_games

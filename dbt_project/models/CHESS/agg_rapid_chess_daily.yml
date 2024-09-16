@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: agg_rapid_chess_daily
+    description: "This aggregated table summarizes games results and ELO by date, it also stores single game details in a struct array column. This game is Rapid chess ONLY."
+    columns:
+      - name: year
+        description: "The year the games were played, used to partition the table."
+        data_tests:
+          - not_null
+
+      - name: month
+        description: "The month the games were played, used to partition the table."
+
+      - name: average_elo
+        description: "Average of my Rapid chess ELO rating during the month."
+
+      - name: total_games
+        description: "The total number of rapid chess games played during the corresponding day."
+
+      - name: total_wins
+        description: "The total number of rapid chess games won during the corresponding day."
+
+      - name: total_losses
+        description: "The total number of rapid chess games lost during the corresponding day."
+
+      - name: total_draws
+        description: "The total number of rapid chess games tied during the corresponding day."
+
+      - name: game_details
+        description: "A struct array of game details. It aggregated all games played during that day with the following info: game uuid, my_rating,
+         opponents_rating, my_resuly, opponents result, remaining time in clock at the end and opening played."
