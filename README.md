@@ -296,6 +296,9 @@ To run these tests I can write dbt test --select fct_chess_games in the terminal
 
 
 ## Documentation
+For documentation I used dbt. By setting up references in the sql files, and adding descriptions to models and columns in yaml files, dbt will be able to generate documentation, yuou can access it by typing dbt docs generate and the dbt docs serve in the terminal. This will launch a tab in your browser where you can see information about your models such as column types, description, dependencies and a lineage graph. For example:
+![image](https://github.com/user-attachments/assets/ba5a8332-1292-4cfb-aa9c-bee5df65a768)
+
 
 ## Data Visualization
 ![Screenshot 2024-09-28 183752](https://github.com/user-attachments/assets/735456e0-48ea-4cfb-a82c-ec9c744ac53d)
