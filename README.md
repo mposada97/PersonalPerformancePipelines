@@ -15,12 +15,13 @@ After completing the diagram I decided to leverage IoT techonlogy with my Oura r
 
 # Data Stack
 This project is built on DataExpert.io's infraestructure (therefore, I only copied my scripts and DAGs to this repo, all of the aws setup is left outside of this public repo to protect the bootcamps infrastructure).
-Storage: AWS S3
-Metadata: Iceberg
-Query Engine: Trino
-Orchestrator: Airflow (Astro)
-Transformations, tests and documentation: dbt
-Data Visualization: Superset
+
+- Storage: AWS S3
+- Metadata: Iceberg
+- Query Engine: Trino
+- Orchestrator: Airflow (Astro)
+- Transformations, tests and documentation: dbt
+- Data Visualization: Superset
 
 # Data Modeling / Data Dictionary
 ## Chess
