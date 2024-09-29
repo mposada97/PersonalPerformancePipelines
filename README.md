@@ -286,7 +286,14 @@ unit_tests:
       format: sql
       rows: |
           select '7a059341-3758-11ef-bfd0-e7ea6f01000f' as uuid, 2024 as year, 7 as month, cast('2024-07-14' as date) as game_date, TIMESTAMP '2024-07-14 03:36:01.000000+00:00' as end_time, 'rapid' as time_class, '600' as time_control, 'black' as my_color, 589 as my_rating, 'chiheb_md' as opponent_username, 587 as opponent_rating, 'e5' as my_first_move, 'e4' as opponent_first_move, cast(17.6 as double) as my_remaining_time_seconds, cast(112.7 as double) as opponent_remaining_time_seconds, 'checkmated' as my_result, 'win' as opponent_result, 55 as number_of_rounds, 'chiheb_md won by checkmate' as termination, 'Scotch-Game' as opening
-```  
+```
+As you can see these yaml file especifies tests for individual columns such as not null, unique tests, and allowed values test. But it also includes unit tests which would test that your sql query will work as expected, it works for both incremental and full refresh models.
+
+NOTE: For incremental models, the expected section will be the data coming into the table, it is not the data of the table after the incoming data arrives.
+
+To run these tests I can write dbt test --select fct_chess_games in the terminal (in the directory of my dbt project). You can also include this as a step in the DAG, in this case I didnt do that because my initial understanding was that tests were run when the model was run, which is not the case, I will talk more about this in the Learnings and next steps section. Here is a screenshot of the tests for my fct_chess_games table, all passed:
+![image](https://github.com/user-attachments/assets/c03e8050-4b54-4fa1-a6d1-d93c9289298e)
+
 
 ## Documentation
 
