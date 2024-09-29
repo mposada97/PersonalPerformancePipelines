@@ -292,11 +292,13 @@ As you can see these yaml file especifies tests for individual columns such as n
 NOTE: For incremental models, the expected section will be the data coming into the table, it is not the data of the table after the incoming data arrives.
 
 To run these tests I can write dbt test --select fct_chess_games in the terminal (in the directory of my dbt project). You can also include this as a step in the DAG, in this case I didnt do that because my initial understanding was that tests were run when the model was run, which is not the case, I will talk more about this in the Learnings and next steps section. Here is a screenshot of the tests for my fct_chess_games table, all passed:
+
 ![image](https://github.com/user-attachments/assets/c03e8050-4b54-4fa1-a6d1-d93c9289298e)
 
 
 ## Documentation
 For documentation I used dbt. By setting up references in the sql files, and adding descriptions to models and columns in yaml files, dbt will be able to generate documentation, yuou can access it by typing dbt docs generate and the dbt docs serve in the terminal. This will launch a tab in your browser where you can see information about your models such as column types, description, dependencies and a lineage graph. For example:
+
 ![image](https://github.com/user-attachments/assets/ba5a8332-1292-4cfb-aa9c-bee5df65a768)
 
 
