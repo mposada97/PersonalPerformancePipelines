@@ -4,7 +4,7 @@ The idea of this project was to build data pipelines around my personal data to 
 
 ![image](https://github.com/user-attachments/assets/40ff19d1-5047-449e-9882-c4e1bb553c5a)
 
-After completing the diagram I decided to leverage IoT techonlogy with my Oura ring to get my health data that includes readiness, sleep, resilience and heart rate. I also decided to build a pipeline around my newest hobbie, which is chess, I have been playing games in chess.com, they have a public API that I can consume to get my games.
+After completing the diagram I decided to leverage IoT technology with my Oura ring to get my health data that includes readiness, sleep, resilience and heart rate, I also have a Macro tracking app I use for my diet, I considered including it here but they dont have an API, there is a data dump but since it envolves manual work to update the data I decided not to include it in the project. I also decided to build a pipeline around my newest hobbie, which is chess, I have been playing games in chess.com, they have a public API that I can consume to get my games.
 
 # Scope
 - Create a daily batch pipeline for my health data (from my oura ring).
