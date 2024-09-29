@@ -1,4 +1,4 @@
-# Personal Performance Pipelines
+# Personal Performance Data Pipelines
 
 The idea of this project was to build data pipelines around my personal data to help me track where I'm at in different aspects of my life and find areas of improvement. The first step was this diagram which I used to decide which aspects of my life I am interested in tracking and which have readily available data that I can consume through API's.
 
