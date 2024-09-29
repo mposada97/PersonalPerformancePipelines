@@ -9,13 +9,6 @@ from include.eczachly.aws_secret_manager import get_secret
 from include.eczachly.trino_queries import run_trino_query_dq_check, execute_trino_query
 import os
 
-#s3_bucket = get_secret("AWS_S3_BUCKET_TABULAR")
-#tabular_credential = get_secret("TABULAR_CREDENTIAL")
-#catalog_name = get_secret("CATALOG_NAME")  # "eczachly-academy-warehouse"
-#aws_region = get_secret("AWS_GLUE_REGION")  # "us-west-2"
-#aws_access_key_id = get_secret("DATAEXPERT_AWS_ACCESS_KEY_ID")
-#aws_secret_access_key = get_secret("DATAEXPERT_AWS_SECRET_ACCESS_KEY")
-
 s3_bucket = Variable.get("AWS_S3_BUCKET_TABULAR")
 tabular_credential = Variable.get("TABULAR_CREDENTIAL")
 catalog_name = Variable.get("CATALOG_NAME")
@@ -89,6 +82,18 @@ def mposada_CHESS_DAG():
         env={"PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
         cwd=PATH_TO_DBT_PROJECT,
     )
+    dbt_run_ranked_best_openings = BashOperator(
+        task_id='dbt_run_ranked_best_openings',
+        bash_command=f'{ENTRYPOINT_CMD} && dbt run -s ranked_best_openings',
+        env={"PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
+        cwd=PATH_TO_DBT_PROJECT,
+    )
+    dbt_run_ranked_worst_openings = BashOperator(
+        task_id='dbt_run_ranked_worst_openings',
+        bash_command=f'{ENTRYPOINT_CMD} && dbt run -s ranked_worst_openings',
+        env={"PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
+        cwd=PATH_TO_DBT_PROJECT,
+    )
 
     start = EmptyOperator(task_id="start")
     end = EmptyOperator(task_id="end", trigger_rule="none_failed")
@@ -96,7 +101,7 @@ def mposada_CHESS_DAG():
     (start >> chessdotcom_api_consumption >> dbt_deps >> dbt_run_fct_chess_games >> 
     [dbt_run_agg_rapid_chess_daily, 
      dbt_run_agg_rapid_chess_monthly_openings
-    ] >> end)
+    ] >> dbt_run_ranked_best_openings >> dbt_run_ranked_worst_openings >> end)
 
 
 mposada_CHESS_DAG()
