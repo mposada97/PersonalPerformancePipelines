@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: ranked_best_openings
+    description: "This is a ranking of the best 5 openings for each color, openings have to be played in at least 1% of my games to show up here."
+    columns:
+      - name: pieces_color
+        description: "The color of the pieces for the opening."
+        data_tests:
+          - not_null
+
+      - name: opening
+        description: "The opening name."
+        data_tests:
+          - not_null
+
+      - name: win_ratio
+        description: "The win ratio for the opening."
+        data_tests:
+          - not_null
+
+      - name: rank
+        description: "The rank of the opening."
+        data_tests:
+          - not_null
+
