@@ -25,9 +25,10 @@ This project is built on DataExpert.io's infrastructure (therefore, I only copie
 - Job Submission: AWS Glue
 - API Consumption and Data Ingestion: Apache Spark (used for consuming APIs and ingesting data into S3)
 
+This readme will be divided in two parts, chess and health (oura).
 
-# Data Modeling / Data Dictionary
-## Chess
+# Chess
+## Data Modeling / Data Dictionary
 
 These are the tables I designed for my chess games, I first consumed the API using spark and processed it into a fact table, then using dbt I created agg_rapid_chess_daily which is an aggregate by day of the results of my chess games, it also includes a column with a struct array that includes details of every chess game played that day, this table is not going to be used in my analysis but could be used for further more detailed analysis. I also creeated agg_rapid_chess_monthly_openings, this is an aggregated table that uses grouping sets to provide easy quering to analyze different aspects of my chess games by year and by month, it also shows how I performed with different color pieces and with different openings as well as overall performance (all colors and all openings). From my monthly chess games aggregate I also created two more tables, ranked_best_openings and ranked_worst_openings, these tables contain my top 5 and worst 5 openings (5 per each color), I was not planning on creating these two tables at first, but the ordering of my bars in the superset barchart wasnt working when I created the table out of of my monthly aggregation table, the ordering worked well with this tables and it also made the refresh of the vizualizations in superset faster.
 
@@ -131,5 +132,21 @@ Notes:
 - The average_elo is only populated for rows where both opening and pieces_color are 'overall'.
 - The win_ratio is calculated as (total_wins / total_games) and rounded to two decimal places.
 
-# The Pipelines:
+## The Pipeline:
+You can find the code in the folders of this repository. Here is a picture of the Airflow DAG with run history, this DAG runs monthly:
+
+![Screenshot 2024-09-28 171718](https://github.com/user-attachments/assets/15814239-3c76-4747-8f84-de5526a3f95d)
+
+## Tests
+
+## Documentation
+
+## Data Visualization
+![Screenshot 2024-09-28 183752](https://github.com/user-attachments/assets/735456e0-48ea-4cfb-a82c-ec9c744ac53d)
+
+This dashboard captures my chess journey, offering clear insights into my performance and areas for improvement. From the visualizations, I can track my ELO rating progression over time, observe my current standing, and identify which color pieces I perform better with (as expected, I tend to perform stronger with the white pieces). Additionally, the dashboard highlights my top-performing and weakest openings. For instance, I’ve had great success with the Scandinavian Defense, boasting an 80% win rate, so it’s a strategy worth continuing. On the other hand, the King's Pawn Opening and its variations appear as some of my worst-performing openings, signaling that I should reconsider using them when possible but that I should also study them  further when my opponent plays the opening.
+
+## Learnings and Next Steps
+
+
 
