@@ -29,6 +29,9 @@ These are the tables I designed for my chess games, I first consumed the API usi
 
 Note: You will notice that I experimented with doubles and decimals in my tables. I understand that it is better to stick to one for consistency but I wanted to experiment with both, I ended liking more the doubles and will be sticking to them in the future but i didnt go back to update all tables for the purposes of this project.
 
+This is a link to the API documentation if you want to attempt a similar project:
+https://www.chess.com/news/view/published-data-api
+
 ### fct_chess_games
 
 | Column Name                       | Data Type | Description                                                                                |
