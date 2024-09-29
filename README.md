@@ -132,6 +132,38 @@ Notes:
 - The average_elo is only populated for rows where both opening and pieces_color are 'overall'.
 - The win_ratio is calculated as (total_wins / total_games) and rounded to two decimal places.
 
+### ranked_best_openings
+
+| Column Name  | Data Type      | Description                                                   |
+|--------------|----------------|---------------------------------------------------------------|
+| pieces_color | VARCHAR        | Color of pieces played ('white' or 'black')                   |
+| opening      | VARCHAR        | Chess opening name                                            |
+| win_ratio    | DECIMAL(10, 2) | Ratio of games won to total games played for this opening     |
+| rank         | INTEGER        | Rank of the opening based on win_ratio (descending order)     |
+
+Notes:
+- This model is materialized as a table.
+- It selects the top 5 best performing openings for each piece color.
+- Only includes openings that have been played in at least 1% of all rapid games.
+- Excludes 'overall' aggregations for both pieces_color and opening.
+- The ranking is based on the win_ratio in descending order (highest win_ratio ranked 1).
+
+### ranked_worst_openings
+
+| Column Name  | Data Type      | Description                                                   |
+|--------------|----------------|---------------------------------------------------------------|
+| pieces_color | VARCHAR        | Color of pieces played ('white' or 'black')                   |
+| opening      | VARCHAR        | Chess opening name                                            |
+| win_ratio    | DECIMAL(10, 2) | Ratio of games won to total games played for this opening     |
+| rank         | INTEGER        | Rank of the opening based on win_ratio (ascending order)      |
+
+Notes:
+- This model is materialized as a table.
+- It selects the top 5 worst performing openings for each piece color.
+- Only includes openings that have been played in at least 1% of all rapid games.
+- Excludes 'overall' aggregations for both pieces_color and opening.
+- The ranking is based on the win_ratio in ascending order (lowest win_ratio ranked 1).
+
 ## The Pipeline:
 You can find the code in the folders of this repository. Here is a picture of the Airflow DAG with run history, this DAG runs monthly:
 
