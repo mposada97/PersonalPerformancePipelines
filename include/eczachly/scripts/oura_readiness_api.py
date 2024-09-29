@@ -29,7 +29,7 @@ params = {
     'start_date': start_date,
     'end_date': end_date
 }
-oura_api_key = 'LIZMF5BT2M22DF3CTRJSHPA4WCTCVZFE'
+oura_api_key = OURA_API # SET IN TERMINAL
 headers = { 
   'Authorization': f'Bearer {oura_api_key}' 
 }
