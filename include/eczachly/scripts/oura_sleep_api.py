@@ -29,7 +29,7 @@ params = {
     'end_date': end_date
 }
 headers = { 
-  'Authorization': 'Bearer LIZMF5BT2M22DF3CTRJSHPA4WCTCVZFE' 
+  'Authorization': f'Bearer {OURA_API}'
 }
 response = requests.request('GET', url, headers=headers, params=params)
 sleep_data = response.json()['data']
