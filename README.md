@@ -14,14 +14,17 @@ After completing the diagram I decided to leverage IoT techonlogy with my Oura r
 - Create data visualizations to track my ELO, and analyze which are my strengths and weaknesses when it comes to chess openings and pieces colors (for example: do I play better with white or black pieces? which openings should I study further to increase my win rate when those openings are played by my oponent, which openings should I keep playing myself?).
 
 # Data Stack
-This project is built on DataExpert.io's infraestructure (therefore, I only copied my scripts and DAGs to this repo, all of the aws setup is left outside of this public repo to protect the bootcamps infrastructure).
+This project is built on DataExpert.io's infrastructure (therefore, I only copied my scripts and DAGs to this repo, all of the AWS setup is left outside of this public repo to protect the bootcamp's infrastructure).
 
 - Storage: AWS S3
 - Metadata: Iceberg
 - Query Engine: Trino
 - Orchestrator: Airflow (Astro)
-- Transformations, tests and documentation: dbt
+- Transformations, tests, and documentation: dbt
 - Data Visualization: Superset
+- Job Submission: AWS Glue
+- API Consumption and Data Ingestion: Apache Spark (used for consuming APIs and ingesting data into S3)
+
 
 # Data Modeling / Data Dictionary
 ## Chess
