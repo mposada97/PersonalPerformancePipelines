@@ -315,6 +315,42 @@ I learned a lot creating this pipeline, one of the things that I learned is that
 
 # Health (Oura)
 ## Data Modeling / Data Dictionary
+### daily_health
+
+| Column Name         | Data Type | Description                                                 |
+|---------------------|-----------|-------------------------------------------------------------|
+| year                | INTEGER   | Year of the health data                                     |
+| month               | INTEGER   | Month of the health data                                    |
+| day                 | DATE      | Date of the health data                                     |
+| resilience_level    | VARCHAR   | Daily resilience level                                      |
+| sleep_recovery      | DOUBLE    | Sleep recovery score                                        |
+| daytime_recovery    | DOUBLE    | Daytime recovery score                                      |
+| stress              | DOUBLE    | Stress level                                                |
+| sleep_score         | DOUBLE    | Overall sleep score                                         |
+| deep_sleep          | DOUBLE    | Deep sleep duration or score                                |
+| efficiency          | DOUBLE    | Sleep efficiency score                                      |
+| latency             | DOUBLE    | Sleep latency (time to fall asleep)                         |
+| rem_sleep           | DOUBLE    | REM sleep duration or score                                 |
+| restfulness         | DOUBLE    | Sleep restfulness score                                     |
+| timing              | DOUBLE    | Sleep timing score                                          |
+| total_sleep         | DOUBLE    | Total sleep duration                                        |
+| avg_awake_bpm       | DOUBLE    | Average heart rate while awake                              |
+| avg_rest_bpm        | DOUBLE    | Average resting heart rate                                  |
+| readiness_score     | DOUBLE    | Overall readiness score                                     |
+| activity_balance    | DOUBLE    | Activity balance score                                      |
+| body_temperature    | DOUBLE    | Body temperature                                            |
+| hrv_balance         | DOUBLE    | Heart rate variability balance                              |
+| recovery_index      | DOUBLE    | Recovery index                                              |
+| resting_heart_rate  | DOUBLE    | Resting heart rate                                          |
+| sleep_balance       | DOUBLE    | Sleep balance score                                         |
+
+Notes:
+- This model is materialized as an incremental table.
+- The unique key for this model is 'day'.
+- The incremental strategy is set to 'merge'.
+- The table is partitioned by 'year' and 'month'.
+- The model combines data from multiple sources: resilience, sleep_data, heart_rate, and readiness.
+- When run incrementally, it only processes data from the latest day in the existing table onwards.
 
 ## The Pipeline
 You can see the code in the dags folder of this repository and the scripts and models scheduled in the dag are under the include and dbt_project folders.
