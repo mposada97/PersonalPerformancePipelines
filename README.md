@@ -315,6 +315,7 @@ I learned a lot creating this pipeline, one of the things that I learned is that
 
 # Health (Oura)
 ## Data Modeling / Data Dictionary
+
 ### daily_health
 
 | Column Name         | Data Type | Description                                                 |
@@ -352,6 +353,56 @@ Notes:
 - The model combines data from multiple sources: resilience, sleep_data, heart_rate, and readiness.
 - When run incrementally, it only processes data from the latest day in the existing table onwards.
 
+### agg_monthly_health
+
+| Column Name         | Data Type      | Description                                             |
+|---------------------|----------------|---------------------------------------------------------|
+| year                | INTEGER        | Year of the aggregated health data                      |
+| month               | INTEGER        | Month of the aggregated health data                     |
+| avg_stress          | DOUBLE         | Average stress level for the month                      |
+| avg_sleep_score     | DOUBLE         | Average sleep score for the month                       |
+| avg_awake_bpm       | DOUBLE         | Average heart rate while awake for the month            |
+| avg_rest_bpm        | DOUBLE         | Average resting heart rate for the month                |
+| avg_readiness_score | DOUBLE         | Average readiness score for the month                   |
+| daily_details       | ARRAY          | Array of daily health metrics (see sub-table below)     |
+
+daily_details Array Structure:
+| Field Name         | Data Type      | Description                                             |
+|--------------------|----------------|---------------------------------------------------------|
+| day                | DATE           | Date of the daily health data                           |
+| resilience_level   | VARCHAR        | Daily resilience level                                  |
+| sleep_recovery     | DECIMAL(10,0)  | Daily sleep recovery score                              |
+| daytime_recovery   | DECIMAL(10,0)  | Daily daytime recovery score                            |
+| stress             | DECIMAL(10,0)  | Daily stress level                                      |
+| sleep_score        | DECIMAL(10,0)  | Daily sleep score                                       |
+| deep_sleep         | DECIMAL(10,0)  | Daily deep sleep duration or score                      |
+| efficiency         | DECIMAL(10,0)  | Daily sleep efficiency                                  |
+| latency            | DECIMAL(10,0)  | Daily sleep latency (time to fall asleep)               |
+| rem_sleep          | DECIMAL(10,0)  | Daily REM sleep duration or score                       |
+| restfulness        | DECIMAL(10,0)  | Daily restfulness score                                 |
+| timing             | DECIMAL(10,0)  | Daily sleep timing score                                |
+| total_sleep        | DECIMAL(10,0)  | Daily total sleep duration                              |
+| avg_awake_bpm      | DECIMAL(10,0)  | Daily average heart rate while awake                    |
+| avg_rest_bpm       | DECIMAL(10,0)  | Daily average resting heart rate                        |
+| readiness_score    | DECIMAL(10,0)  | Daily readiness score                                   |
+| activity_balance   | DECIMAL(10,0)  | Daily activity balance score                            |
+| body_temperature   | DECIMAL(10,0)  | Daily body temperature                                  |
+| hrv_balance        | DECIMAL(10,0)  | Daily heart rate variability balance                    |
+| recovery_index     | DECIMAL(10,0)  | Daily recovery index                                    |
+| resting_heart_rate | DECIMAL(10,0)  | Daily resting heart rate                                |
+| sleep_balance      | DECIMAL(10,0)  | Daily sleep balance score                               |
+
+Notes:
+- This model is materialized as an incremental table.
+- The unique key for this model is the combination of 'year' and 'month'.
+- The incremental strategy is set to 'merge'.
+- The table is partitioned by 'year'.
+- The model aggregates data from the 'daily_health' model on a monthly basis.
+- It calculates average values for stress, sleep score, awake heart rate, resting heart rate, and readiness score.
+- The daily_details array contains all daily metrics for each day in the month.
+- When run incrementally, it only processes data for months newer than the latest month in the existing table.
+
+  
 ## The Pipeline
 You can see the code in the dags folder of this repository and the scripts and models scheduled in the dag are under the include and dbt_project folders.
 ![image](https://github.com/user-attachments/assets/a3a29a7f-e269-4307-bb08-a95ceea8ceee)
