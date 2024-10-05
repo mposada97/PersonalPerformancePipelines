@@ -314,6 +314,28 @@ I learned a lot creating this pipeline, one of the things that I learned is that
 ![image](https://github.com/user-attachments/assets/bde03cbf-3d0c-457f-b476-e88148f0bd91)
 
 # Health (Oura)
+## Data Modeling / Data Dictionary
+
+## The Pipeline
+You can see the code in the dags folder of this repository and the scripts and models scheduled in the dag are under the include and dbt_project folders.
+![image](https://github.com/user-attachments/assets/a3a29a7f-e269-4307-bb08-a95ceea8ceee)
+
+
+## Tests and Documentation
+Im not going into detail here, the same methods and tools that I used in my chess pipeline apply.
+
+## Data Visualization
+
+![image](https://github.com/user-attachments/assets/b970b65e-1155-4b16-9555-d775de2bf0fb)
+This dashboard refreshes daily to provide a clear snapshot of my key health metrics, such as sleep and readiness scores. It offers detailed insights into secondary factors contributing to those scores, like sleep efficiency and deep sleep, allowing me to pinpoint areas for improvement. For example, I’ve noticed that my total and REM sleep scores are often lower, signaling a need to increase my sleep duration to enhance my overall sleep quality. The dashboard also displays trends for the current month and all-time averages of my key health data, including heart rate, providing a comprehensive view for both short-term and long-term health monitoring. 
+
+Note: You will notice the daily heart rate chart is missing some data, the reason is because I took my project off Astro so that I didnt have to pay any fees and I have been running it locally, when you call the heart rate api it will give you a maximum of two days of heart rate data so basically I forgot to run my pipelines locally for a couple of days therefore the gap.
+
+## Learnings and Next Steps
+
+Similar to my oura data I could apply some ML to the detail data (the secondary scores that make up the main scores) to find whats the correlation and see which socres I should prioritize to get better overall health and zleep scores. Also It would be benefitial to have a microbacth or real time layer that tracks my heart rate since the oura ring does give you multiple values through the day (which is not the case with the scores), this could be useful to set up alarms if it goes above a certain level.
+
+
 
 
 
