@@ -420,7 +420,7 @@ Note: You will notice the daily heart rate chart is missing some data, the reaso
 
 ## Learnings and Next Steps
 
-Similar to my oura data I could apply some ML to the detail data (the secondary scores that make up the main scores) to find whats the correlation and see which socres I should prioritize to get better overall health and zleep scores. Also It would be benefitial to have a microbacth or real time layer that tracks my heart rate since the oura ring does give you multiple values through the day (which is not the case with the scores), this could be useful to set up alarms if it goes above a certain level.
+Similar to my oura data I could apply some ML to the detail data (the secondary scores that make up the main scores) to find whats the correlation and see which socres I should prioritize to get better overall health and zleep scores. Also It would be benefitial to have a microbacth or real time layer that tracks my heart rate since the oura ring does give you multiple values through the day (which is not the case with the scores), this could be useful to set up alarms if it goes above a certain level. Same as with my chess pipeline I learned that in order to use tests correctly and improve data quality the WAP pattern is the best practice and I will be implementing that in future projects.
 
 
 
