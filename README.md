@@ -25,7 +25,7 @@ This project is built on DataExpert.io's infrastructure (therefore, I only copie
 - Job Submission: AWS Glue
 - API Consumption and Data Ingestion: Apache Spark (used for consuming APIs and ingesting data into S3)
 
-This readme will be divided in two parts, chess and health (oura).
+The rest of this readme will be divided in two sections, chess and health (oura).
 
 # Chess
 ## Data Modeling / Data Dictionary
@@ -312,6 +312,8 @@ The next steps of the project for my chess data pipeline would be to do further 
 
 I learned a lot creating this pipeline, one of the things that I learned is that in dbt the tests are not run when you call the model, I thought that when calling the model the tests would be ran and they could break the pipeline,. This is not the case, in order to achieve a pattern that runs the tests and then brings the data to a production table I should use the WAP pattern (write-audit-publish), this would involve using staging tables, then run the dbt tests on them and then write to production if the tests are passed. Here is a diagram of the pattern I should have used and will continue to use in the future:
 ![image](https://github.com/user-attachments/assets/bde03cbf-3d0c-457f-b476-e88148f0bd91)
+
+# Health (Oura)
 
 
 
